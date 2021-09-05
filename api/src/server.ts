@@ -1,5 +1,6 @@
 import express = require('express');
 import got from 'got';
+import cors = require('cors');
 import { StationResponse, StationStatus, StatusResponse } from './types';
 
 const app = express();
@@ -11,6 +12,10 @@ const httpOptions = {
     'Client-Identifier': 'grashorn-kodeoppgave'
   }
 };
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}))
 
 app.get('/', async (req, res, next) => {
   let stationStatuses: StationStatus[]
