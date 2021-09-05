@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bike-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: prod-nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+        - oslobysykkelstasjoner.no
+      secretName: oslobysykkelstasjoner.no
+  rules:
+  - host: oslobysykkelstasjoner.no
+    http:
+      paths:
+      - pathType: Prefix
+        path: /api(/|$)(.*)
+        backend:
+          service:
+            name: bike-api
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: bike-frontend
+            port: 
+              number: 80

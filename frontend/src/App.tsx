@@ -15,10 +15,15 @@ const useStyles = makeStyles({
   },
 });
 
-const App = () : ReactElement => {
+const App = (): ReactElement => {
   const classes = useStyles();
-  const url = "http://localhost:3100"
-  
+  let url: string;
+  if (process.env.NODE_ENV === 'production') {
+    url = 'https://oslobysykkelstasjoner.no/api';
+  } else {
+    url = "http://localhost:3100";
+  }
+
   const [stations, setStations] = useState<StationStatus[]>();
 
   useEffect(() => {

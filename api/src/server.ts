@@ -13,8 +13,9 @@ const httpOptions = {
   }
 };
 
+const prodUrl = process.env.FRONTEND_URL;
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000', prodUrl
 }))
 
 app.get('/', async (req, res, next) => {
@@ -27,6 +28,10 @@ app.get('/', async (req, res, next) => {
   }
 
   res.send(stationStatuses)
+});
+
+app.get('/healthz', function(req, res, next) {
+  res.status(200).send("Alive!")
 });
 
 app.use(errorHandler);
