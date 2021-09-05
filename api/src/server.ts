@@ -26,6 +26,8 @@ app.get('/', async (req, res, next) => {
 
 app.use(errorHandler);
 
+// Use cors
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`API listening at port ${port}`)
