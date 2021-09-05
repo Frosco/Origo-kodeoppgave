@@ -9,25 +9,29 @@ import Paper from '@material-ui/core/Paper';
 import { ReactElement, useEffect, useState } from 'react';
 import { StationStatus } from './types';
 
+const prodApiUrl = 'https://oslobysykkelstasjoner.no/api';
+const devApiUrl = 'http://localhost:3100';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 450,
-  },
+  }
 });
 
 const App = (): ReactElement => {
   const classes = useStyles();
-  let url: string;
+
+  let apiUrl: string;
   if (process.env.NODE_ENV === 'production') {
-    url = 'https://oslobysykkelstasjoner.no/api';
+    apiUrl = prodApiUrl;
   } else {
-    url = "http://localhost:3100";
+    apiUrl = devApiUrl;
   }
 
   const [stations, setStations] = useState<StationStatus[]>();
 
   useEffect(() => {
-    fetch(url, {
+    fetch(apiUrl, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -39,7 +43,7 @@ const App = (): ReactElement => {
       .then((responseBody) => {
         setStations(responseBody);
       });
-  }, [url]);
+  }, [apiUrl]);
 
   console.log(stations);
 
