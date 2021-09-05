@@ -12,21 +12,21 @@ import { StationStatus } from './types';
 const prodApiUrl = 'https://oslobysykkelstasjoner.no/api';
 const devApiUrl = 'http://localhost:3100';
 
+let apiUrl: string;
+if (process.env.NODE_ENV === 'production') {
+  apiUrl = prodApiUrl;
+} else {
+  apiUrl = devApiUrl;
+}
+
 const useStyles = makeStyles({
   table: {
-    minWidth: 450,
+    minWidth: 450
   }
 });
 
 const App = (): ReactElement => {
   const classes = useStyles();
-
-  let apiUrl: string;
-  if (process.env.NODE_ENV === 'production') {
-    apiUrl = prodApiUrl;
-  } else {
-    apiUrl = devApiUrl;
-  }
 
   const [stations, setStations] = useState<StationStatus[]>();
 
@@ -43,9 +43,7 @@ const App = (): ReactElement => {
       .then((responseBody) => {
         setStations(responseBody);
       });
-  }, [apiUrl]);
-
-  console.log(stations);
+  }, []);
 
   return (
     <TableContainer component={Paper}>

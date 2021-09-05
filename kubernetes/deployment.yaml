@@ -28,7 +28,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /healthz
-              port: 3010
+              port: 3100
               scheme: HTTP
             initialDelaySeconds: 2
             periodSeconds: 2
