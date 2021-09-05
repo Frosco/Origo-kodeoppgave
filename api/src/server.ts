@@ -28,7 +28,7 @@ app.use(errorHandler);
 
 // Use cors
 
-const port = 3000;
+const port = 3100;
 app.listen(port, () => {
   console.log(`API listening at port ${port}`)
 })
