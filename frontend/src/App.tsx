@@ -20,8 +20,18 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 450
+  container: {
+    margin: '8rem 2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  header: {
+    color: '#00008B'
+  },
+  paper: {
+    maxWidth: '75%'
   }
 });
 
@@ -46,28 +56,33 @@ const App = (): ReactElement => {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Stasjon</TableCell>
-            <TableCell align="right">Sykler</TableCell>
-            <TableCell align="right">Lås</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {stations && stations.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.bikes}</TableCell>
-              <TableCell align="right">{row.docks}</TableCell>
+    <div className={classes.container}>
+      <div className={classes.header}>
+        <h1>Bysykkelstasjoner</h1>
+      </div>
+      <TableContainer className={classes.paper} component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Stasjon</TableCell>
+              <TableCell align="right">Sykler</TableCell>
+              <TableCell align="right">Lås</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {stations && stations.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.bikes}</TableCell>
+                <TableCell align="right">{row.docks}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 
