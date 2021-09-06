@@ -1,7 +1,7 @@
 # Origo-kodeoppgave
 
-A coding test by the digital department of the City of Oslo.
-The project consists of an express backend and a React frontend. It uses Typescript in both projects.
+A coding test for the digital department of the City of Oslo.
+The project consists of an express backend and a React frontend. It uses Typescript in both parts.
 
 ## Local development ("Running it")
 
@@ -11,4 +11,4 @@ Open another shell and navigate to the `frontend` folder. Run `npm install` and 
 
 ## A note about Kubernetes
 
-The files containing Kubernetes resources are meant as an illustration for how a production configuration of this project could look like. To make it work, a dns address needs to be obtained and the docker images need to be uploaded to a registry and the corresponding references in code and yaml-files need to be replaced. Furthermore it is assumed that the nginx ingress controller is present on the cluster.
+The files containing Kubernetes resources are meant as an illustration for how a production configuration of this project could look like. To make it work, a dns address needs to be obtained, the docker images need to be uploaded to a registry and the corresponding references in code and yaml-files need to be replaced. Furthermore it is assumed that an nginx ingress controller is present on the cluster.

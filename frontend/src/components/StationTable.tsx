@@ -28,8 +28,8 @@ const StationTable = ({stations}: {stations: StationStatus[] | undefined;}): Rea
                 <TableHead>
                     <TableRow>
                         <TableCell>Stasjon</TableCell>
-                        <TableCell align="right">Sykler</TableCell>
-                        <TableCell align="right">Lås</TableCell>
+                        <TableCell align="right">Ledige sykler</TableCell>
+                        <TableCell align="right">Tilgjengelige låser</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
