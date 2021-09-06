@@ -6,6 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import { ReactElement, useEffect, useState } from 'react';
 import { StationStatus } from './types';
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const useStyles = makeStyles({
-  container: {
+  rootContainer: {
     margin: '8rem 2rem',
     display: 'flex',
     flexDirection: 'column',
@@ -30,6 +31,9 @@ const useStyles = makeStyles({
   header: {
     color: '#00008B'
   },
+  search: {
+    margin: '1rem'
+  },
   paper: {
     maxWidth: '75%'
   }
@@ -38,6 +42,7 @@ const useStyles = makeStyles({
 const App = (): ReactElement => {
   const classes = useStyles();
 
+  const [unfilteredStations, setUnfilteredStations] = useState<StationStatus[]>();
   const [stations, setStations] = useState<StationStatus[]>();
 
   useEffect(() => {
@@ -51,15 +56,33 @@ const App = (): ReactElement => {
         return response.json();
       })
       .then((responseBody) => {
+        setUnfilteredStations(responseBody);
         setStations(responseBody);
       });
   }, []);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.rootContainer}>
       <div className={classes.header}>
         <h1>Bysykkelstasjoner</h1>
       </div>
+
+      <TextField
+        className={classes.search}
+        id="standard-search"
+        label="Søk etter stasjon"
+        type="search"
+        onChange={(event): void => {
+          const val = event?.target?.value ?? "";
+          const filteredStations = unfilteredStations?.filter(s => s.name.toLowerCase().includes(val));
+          if (filteredStations) {
+            setStations(filteredStations);
+          }
+          else {
+            setStations(unfilteredStations)
+          }
+        }} />
+
       <TableContainer className={classes.paper} component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
