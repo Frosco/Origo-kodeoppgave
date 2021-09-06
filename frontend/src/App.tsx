@@ -36,6 +36,9 @@ const useStyles = makeStyles({
   },
   paper: {
     maxWidth: '75%'
+  },
+  error: {
+    color: 'red'
   }
 });
 
@@ -93,15 +96,18 @@ const App = (): ReactElement => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {stations && stations.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.bikes}</TableCell>
-                <TableCell align="right">{row.docks}</TableCell>
-              </TableRow>
-            ))}
+            {stations ?
+              stations.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.bikes}</TableCell>
+                  <TableCell align="right">{row.docks}</TableCell>
+                </TableRow>
+              )) :
+              <p className={classes.error}>Vi kan dessverre ikke vise stasjonene akkurat nå. Prøv igjen senere.</p>
+            }
           </TableBody>
         </Table>
       </TableContainer>
